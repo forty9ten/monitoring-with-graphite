@@ -1,0 +1,42 @@
+-@ val title: String = "Members Only"
+-@ val headline: String = title
+-@ val body: String
+
+!!! 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='shortcut icon' href='/ico/favicon.png')
+    title= title
+
+    link(href='/css/bootstrap.min.css' rel='stylesheet')
+    link(href='/css/application.css' rel='stylesheet')
+
+    body
+        .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+            .container
+                .navbar-header
+                    button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-collapse')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/')= title
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        - if (session.getAttribute("loggedIn") != null) {
+                            li.active
+                                a(href='/sessions/destroy') Logout
+                        - }
+
+        .container
+            - flash.get("notice").foreach { notice =>
+                .alert.alert-success= notice
+            - }
+
+            != body
+
+        script(src='/js/jquery-2.0.3.min.js')
+        script(src='/js/bootstrap.min.js')

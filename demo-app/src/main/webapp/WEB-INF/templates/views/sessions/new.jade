@@ -1,0 +1,11 @@
+-@ val message: Option[String] = None
+
+form.form-signin(action='/sessions' method='post')
+    h2.form-signin-heading Please sign in
+    - message.foreach { message =>
+        .alert.alert-danger= message
+    - }
+    input.form-control(name='email' type='text' placeholder='Email address' autofocus='autofocus')
+    input.form-control(name='password' type='password' placeholder='Password')
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+    a.btn.btn-lg.btn-info.btn-block(href='/users/new') Register
